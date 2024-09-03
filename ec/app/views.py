@@ -154,6 +154,9 @@ class checkout(View):
         #     )
         #     payment.save()
         return render(request, 'app/checkout.html',locals())
+    def post(self, request):
+        print(request)
+        return render(request, 'app/checkout.html',locals())
 
 
 def payment_done(request):

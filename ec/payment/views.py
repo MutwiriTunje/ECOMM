@@ -1,5 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.views.decorators.csrf import csrf_exempt
 
 
 from .utils import stk_push, timeConverter
@@ -9,11 +10,11 @@ from .models import *
 # Create your views here.
 
 
-
 @api_view(['POST'])
 def makepayment(request):
     # { "phoneNumber":"254706803305", "amount":"1"}
     data = request.data
+    print(data)
     amount = float(data['amount'])
     phoneNumber = data['phoneNumber']
     # Handle number validation/changing it to 254*** on client side
@@ -23,9 +24,9 @@ def makepayment(request):
         print(e)
         # email or text admin there is a problem with generating access token
         return Response({'errorMessage':'Error! Try Again Later.'})
-    print("the response")
-    print(response)
-    print("--0---")
+    # print("the response")
+    # print(response)
+    # print("--0---")
     if 'errorMessage' in response:
         # print('error has occured')
         # unlock the products

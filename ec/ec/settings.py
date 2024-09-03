@@ -45,10 +45,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    
+    'corsheaders.middleware.CorsMiddleware',
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -137,3 +141,5 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 RAZOR_KEY_ID =""
 RAZOR_KEY_SECRET = ""
+
+CORS_ALLOW_ALL_ORIGINS = True

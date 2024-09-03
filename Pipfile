@@ -9,6 +9,7 @@ djangorestframework = "*"
 requests = "*"
 pillow = "*"
 python-decouple = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 

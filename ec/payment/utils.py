@@ -12,13 +12,13 @@ import base64
 def generate_access_token():
     try:
         results = requests.get(config('ACCESS_TOKEN_URL'), auth=HTTPBasicAuth(config('MPESA_CONSUMER_KEY'),config('MPESA_CONSUMER_SECRET')))
-        print("status Code:" + str(results.status_code))
+        # print("status Code:" + str(results.status_code))
         if results.status_code != 200:
             raise Exception('Failed to generate Access token')
         else:
             response = results.json()
             # if successful - response is json of expiry_in, access_token
-            print(response)
+            # print(response)
             access_token = response["access_token"]
     except requests.exceptions.ConnectionError:
         raise Exception("Mpesa Connection Failed")
@@ -43,7 +43,7 @@ def generate_password(date):
     thePassword = config('MPESA_EXPRESS_SHORTCODE') + config('MPESA_PASSKEY') + date
     encodedPass = base64.b64encode(thePassword.encode('ascii'))
     decodedPass = encodedPass.decode("utf-8")
-    print(decodedPass)
+    # print(decodedPass)
     return decodedPass
 
 def stk_push(amount, number):
@@ -70,9 +70,9 @@ def stk_push(amount, number):
     response = requests.post(config('STK_PUSH_URL'), json=json_parameters,headers=headers)
 
     responseString = response.text
-    print(responseString)
+    # print(responseString)
     jsonResponse = json.loads(responseString)
-    print(jsonResponse)
+    # print(jsonResponse)
     # if stk push successful, you'll get a response with
     # MerchantRequestID, CheckoutRequestID, ResponseDescription
     # ResponseCode(with 0 meaning successful), CustomerMessage
