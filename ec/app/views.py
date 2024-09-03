@@ -5,13 +5,13 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.urls import reverse
 from django.views import View
-import razorpay
+# import razorpay
 import requests
-from . models import Cart, Customer, OrderPlaced, Payment, Product, Transaction
+from . models import Cart, Customer, OrderPlaced, Payment, Product
 from . forms import CustomerProfileForm, CustomerRegistrationForm
 from django.contrib import messages
-from django_daraja.mpesa.core import MpesaClient
-import logging
+# from django_daraja.mpesa.core import MpesaClient
+# import logging
 
 from rest_framework.decorators import authentication_classes, permission_classes
 from rest_framework.permissions import AllowAny
@@ -108,6 +108,7 @@ class updateAddress(View):
         return redirect("address")
 
 def add_to_cart(request):
+    print("to cart now")
     user=request.user
     product_id=request.GET.get('prod_id')
     product = Product.objects.get(id=product_id)
@@ -115,6 +116,7 @@ def add_to_cart(request):
     return redirect("/cart")
 
 def show_cart(request):
+    print("buy now here")
     user = request.user
     cart = Cart.objects.filter(user=user)
     amount = 0
@@ -136,21 +138,21 @@ class checkout(View):
             famount = famount + value
         totalamount = famount + 50
         razoramount =int(totalamount * 100)
-        client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
-        data = { "amount": razoramount, "currency": "KSH", "receipt": "order_rcptid_11"}
-        payment_response = client.order.create(data=data)
-        print(payment_response)
+        # client = razorpay.Client(auth=(settings.RAZOR_KEY_ID, settings.RAZOR_KEY_SECRET))
+        # data = { "amount": razoramount, "currency": "KSH", "receipt": "order_rcptid_11"}
+        # payment_response = client.order.create(data=data)
+        # print(payment_response)
 
-        order_id = payment_response['id']
-        order_status = payment_response['status']
-        if order_status == 'created':
-            payment = Payment(
-                user=user,
-                amount=totalamount,
-                razorpay_order_id=order_id,
-                razorpay_payment_status = order_status
-            )
-            payment.save()
+        # order_id = payment_response['id']
+        # order_status = payment_response['status']
+        # if order_status == 'created':
+        #     payment = Payment(
+        #         user=user,
+        #         amount=totalamount,
+        #         razorpay_order_id=order_id,
+        #         razorpay_payment_status = order_status
+        #     )
+        #     payment.save()
         return render(request, 'app/checkout.html',locals())
 
 

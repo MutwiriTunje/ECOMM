@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Cart, OrderPlaced, Transaction, Product, Customer
+from . models import Cart, OrderPlaced, Product, Customer
 
 # Register your models here.
 
@@ -23,9 +23,9 @@ class CartModelAdmin(admin.ModelAdmin):
 # class PaymentAdmin(admin.ModelAdmin):
 #     list_display = ['id', 'user', 'amount', 'mpesa_transaction_id', 'mpesa_payment_status', 'mpesa_payment_reference', 'paid']
 
-@admin.register(Transaction)
-class TransactionModelAdmin(admin.ModelAdmin):
-    list_display = ['transaction_no', 'phone_number', 'checkout_request_id', 'reference', 'description', 'amount', 'status','receipt_no','created','ip']
+# @admin.register(Transaction)
+# class TransactionModelAdmin(admin.ModelAdmin):
+#     list_display = ['transaction_no', 'phone_number', 'checkout_request_id', 'reference', 'description', 'amount', 'status','receipt_no','created','ip']
 
 
 @admin.register(OrderPlaced)
