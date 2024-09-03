@@ -82,7 +82,6 @@ def processingPayment(request):
         successPay = Payments(MerchantRequestID=MerchantRequestID, resultCode=resultCode,resultDesc=resultDesc,receiptNumber=receiptNumber,amount=amount,transactionDate=transactionDate,phoneNumber=phoneNumber)
         successPay.save()
         # add to Payments table, MerchantRequestID, resultCode, resultDesc, receiptNumber, amount, transactionDate, phoneNumber
-        # return receiptNumber, that it may be added to orders
 
         return Response('success')
     else:
@@ -174,5 +173,3 @@ def checkPayment(request):
     else:
         # Daraja has not yet sent a response
         return Response({"entry_found":False})
-
-    # - if payment already made but flutter didn't detect, then create a place where they can enter amount, mpesareceipt number, and phonenumber
